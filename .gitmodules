@@ -2,3 +2,7 @@
 	path = zkevm-node
 	url = git@github.com:cwbhhjl/zkevm-node.git
 	branch = demo
+[submodule "zkevm-bridge-service"]
+	path = zkevm-bridge-service
+	url = git@github.com:cwbhhjl/zkevm-bridge-service.git
+	branch = demo
