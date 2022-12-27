@@ -36,3 +36,6 @@ docker-compose stop
 docker-compose down
 ```
 
+## test account
+
+[zkevm node doc](./zkevm-node/docs/running_local.md#accounts)
