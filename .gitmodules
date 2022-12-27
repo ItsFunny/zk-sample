@@ -6,3 +6,7 @@
 	path = zkevm-bridge-service
 	url = git@github.com:cwbhhjl/zkevm-bridge-service.git
 	branch = demo
+[submodule "zkevm-bridge-ui"]
+	path = zkevm-bridge-ui
+	url = git@github.com:0xPolygonHermez/zkevm-bridge-ui.git
+	branch = develop
