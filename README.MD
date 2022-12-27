@@ -1,4 +1,10 @@
 
+## requirements
+
+* `go` <https://go.dev/doc/install>
+* `docker` <https://www.docker.com/get-started>
+* `docker-compose` <https://docs.docker.com/compose/install/>
+
 ## init
 
 ```bash
