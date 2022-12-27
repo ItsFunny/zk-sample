@@ -1,21 +1,38 @@
 
+## init
+
+```bash
+git submodule init
+git submodule update
+```
+
 ## build
 
+```
 ./build.sh
+```
 
-## Run
+## run
 
+```
 ./run.sh
+```
 
-## Stop
+## stop
 
+```
 docker-compose stop
+```
 
-## Restart
+## restart
 
+```
 ./restart.sh
+```
 
-## Down
+## down
 
+```
 docker-compose down
+```
 
