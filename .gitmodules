@@ -1,0 +1,4 @@
+[submodule "zkevm-node"]
+	path = zkevm-node
+	url = git@github.com:cwbhhjl/zkevm-node.git
+	branch = demo
