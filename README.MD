@@ -42,6 +42,10 @@ docker-compose stop
 docker-compose down
 ```
 
-## test account
+## info
 
-[zkevm node doc](./zkevm-node/docs/running_local.md#accounts)
+[test account](./zkevm-node/docs/running_local.md#accounts)
+
+[metamask config](./zkevm-node/docs/running_local.md#metamask)
+
+bridge ui <http://localhost:8090/>  
