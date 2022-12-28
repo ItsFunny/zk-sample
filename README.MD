@@ -45,8 +45,8 @@ docker-compose down
 
 ## info
 
-[test account](./zkevm-node/docs/running_local.md#accounts)
+[test account](https://github.com/cwbhhjl/zkevm-node/tree/e8a3c4bf5629b5325191e16d5180c9396216fa9f/docs/running_local.md#accounts)
 
-[metamask config](./zkevm-node/docs/running_local.md#metamask)
+[metamask config](https://github.com/cwbhhjl/zkevm-node/tree/e8a3c4bf5629b5325191e16d5180c9396216fa9f/docs/running_local.md#metamask)
 
 bridge ui <http://localhost:8090/>  
