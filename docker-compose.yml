@@ -6,8 +6,8 @@ services:
   zkevm-sequencer:
     container_name: zkevm-sequencer
     image: zkevm-node
-    ports:
-      - 9092:9091 # needed if metrics enabled
+    # ports:
+      # - 9092:9091 # needed if metrics enabled
     environment:
       - ZKEVM_NODE_STATEDB_HOST=zkevm-state-db
       - ZKEVM_NODE_POOL_HOST=zkevm-state-db
@@ -25,7 +25,7 @@ services:
     image: zkevm-node
     ports:
       - 8123:8123
-      - 9091:9091 # needed if metrics enabled
+      # - 9091:9091 # needed if metrics enabled
     environment:
       - ZKEVM_NODE_STATEDB_HOST=zkevm-state-db
       - ZKEVM_NODE_POOL_HOST=zkevm-state-db
@@ -44,7 +44,7 @@ services:
     container_name: zkevm-aggregator
     image: zkevm-node
     ports:
-      - 50081:50081
+      - "127.0.0.1:50081:50081"
     environment:
       - ZKEVM_NODE_STATEDB_HOST=zkevm-state-db
     volumes:
@@ -76,7 +76,7 @@ services:
     environment:
       - ZKEVM_NODE_STATEDB_HOST=zkevm-state-db
     ports:
-      - 61090:61090
+      - "127.0.0.1:61090:61090"
     volumes:
       - ./test.keystore:/pk/keystore
       - ./config/test.node.config.toml:/app/config.toml
@@ -96,7 +96,7 @@ services:
         reservations:
           memory: 1G
     ports:
-      - 5432:5432
+      - "127.0.0.1:5432:5432"
     volumes:
       - ./config/init_db.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
@@ -107,7 +107,7 @@ services:
 
   zkevm-explorer-l1:
     container_name: zkevm-explorer-l1
-    image: hermeznetwork/hermez-node-blockscout:latest
+    image: hermeznetwork/zkevm-explorer:latest
     ports:
       - 4000:4000
     environment:
@@ -124,7 +124,7 @@ services:
 
   zkevm-explorer-l2:
     container_name: zkevm-explorer-l2
-    image: hermeznetwork/hermez-node-blockscout:latest
+    image: hermeznetwork/zkevm-explorer:latest
     ports:
       - 4001:4000
     environment:
@@ -152,6 +152,7 @@ services:
       - ZKEVM_NODE_RPC_DB_HOST=zkevm-state-db
       - ZKEVM_NODE_RPC_PORT=8124
     volumes:
+      - ./test.keystore:/pk/keystore
       - ./config/test.node.config.toml:/app/config.toml
       - ./config/test.genesis.config.json:/app/genesis.json
     command:
@@ -171,10 +172,10 @@ services:
     container_name: zkevm-prover
     image: hermeznetwork/zkevm-prover:5a4c49d
     ports:
-      # - 50051:50051 # Prover
-      - 50052:50052 # Mock prover
-      - 50061:50061 # MT
-      - 50071:50071 # Executor
+      - "127.0.0.1:50051:50051" # Prover
+      - "127.0.0.1:50052:50052" # Mock prover
+      - "127.0.0.1:50061:50061" # MT
+      - "127.0.0.1:50071:50071" # Executor
     volumes:
       - ./config/test.prover.config.json:/usr/src/app/config.json
     command: >
