@@ -10,3 +10,6 @@
 	path = zkevm-bridge-ui
 	url = git@github.com:0xPolygonHermez/zkevm-bridge-ui.git
 	branch = develop
+[submodule "exchain"]
+	path = exchain
+	url = git@github.com:okx/exchain.git
