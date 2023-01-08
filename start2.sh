@@ -17,6 +17,7 @@ sleep 2
 npm run deploy:PoE2_0:okc
 
 cd ..
+
 set_key_value() {
   local key=${1}
   local value=${2}
@@ -26,7 +27,12 @@ set_key_value() {
     if [ -n $current ];then
       echo "setting ${conf} : $key = $value"
       value="$(echo "${value}" | sed 's|[&]|\\&|g')"
-      sed -i '' "s|^[#]*[ ]*${key}\([ ]*\)=.*|${key} = ${value}|" ${conf}
+
+      if [ "$(uname -s)" == "Darwin" ]; then
+          sed -i '' "s|^[#]*[ ]*${key}\([ ]*\)=.*|${key} = ${value}|" ${conf}
+      else
+          sed -i "s|^[#]*[ ]*${key}\([ ]*\)=.*|${key} = ${value}|" ${conf}
+      fi
     fi
   fi
 }
