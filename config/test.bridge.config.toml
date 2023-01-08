@@ -11,8 +11,10 @@ Host = "zkevm-bridge-db"
 Port = "5435"
 MaxConns = 20
 
+
+
 [Etherman]
-L1URL = "http://zkevm-mock-l1-network:8545"
+L1URL = "http://127.0.0.1:26659"
 L2URLs = ["http://zkevm-json-rpc:8123"]
 
 [Synchronizer]

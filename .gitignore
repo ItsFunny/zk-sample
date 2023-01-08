@@ -1,1 +1,4 @@
 .idea
+vendor
+_cache_evm
+*.txt
