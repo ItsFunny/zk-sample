@@ -1,0 +1,16 @@
+{
+    "trustedSequencerURL": "http://127.0.0.1:8123",
+    "forceBatchAllowed": false,
+    "trustedSequencerAddress":"0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+    "realVerifier": false,
+    "chainID": 1337,
+    "networkName": "exchain",
+    "claimTimeout": 0,
+    "privateKey": "",
+    "maxFeePerGas":0,
+    "maxPriorityFeePerGas":0,
+    "multiplierGas": 0,
+    "trustedSequencerPvtKey":"",
+    "bridgeMock":false,
+    "securityCouncilAddress":"0x617b3a3528F9cDd6630fd3301B9c8911F7Bf063D"
+}
