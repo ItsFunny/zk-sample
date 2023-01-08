@@ -37,6 +37,25 @@ set_key_value() {
   fi
 }
 
+set_key_value2() {
+  local key=${1}
+  local value=${2}
+  local conf=${3}
+  if [ -n $value ]; then
+    #echo $value
+    local current=$(sed -n -e "s/^\($key = \)\([^ ']*\)\(.*\)$/\2/p" ${conf}) # value不带单引号
+    if [ -n $current ];then
+      echo "setting ${conf} : $key = $value"
+      value="$(echo "${value}" | sed 's|[&]|\\&|g')"
+      if [ "$(uname -s)" == "Darwin" ]; then
+          sed -i '' "s|^[#]*[ ]*${key}\([ ]*\)=.*|${key} = ${value}|" ${conf}
+      else
+          sed -i "s|^[#]*[ ]*${key}\([ ]*\)=.*|${key} = ${value}|" ${conf}
+      fi
+    fi
+  fi
+}
+
 proofOfEfficiencyAddress=$(cat ./zkevm-contracts/deployment/deploy_output.json | jq '.["proofOfEfficiencyAddress"]')
 bridgeAddress=$(cat ./zkevm-contracts/deployment/deploy_output.json | jq '.["bridgeAddress"]')
 globalExitRootManagerAddress=$(cat ./zkevm-contracts/deployment/deploy_output.json | jq '.["globalExitRootManagerAddress"]')
