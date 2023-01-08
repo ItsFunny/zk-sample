@@ -1,15 +1,15 @@
 [submodule "zkevm-node"]
 	path = zkevm-node
-	url = git@github.com:cwbhhjl/zkevm-node.git
+	url = https://github.com/cwbhhjl/zkevm-node.git
 	branch = demo
 [submodule "zkevm-bridge-service"]
 	path = zkevm-bridge-service
-	url = git@github.com:cwbhhjl/zkevm-bridge-service.git
+	url = https://github.com/cwbhhjl/zkevm-bridge-service.git
 	branch = demo
 [submodule "zkevm-bridge-ui"]
 	path = zkevm-bridge-ui
-	url = git@github.com:0xPolygonHermez/zkevm-bridge-ui.git
+	url = https://github.com/0xPolygonHermez/zkevm-bridge-ui.git
 	branch = develop
 [submodule "exchain"]
 	path = exchain
-	url = git@github.com:okx/exchain.git
+	url = https://github.com/okx/exchain.git
