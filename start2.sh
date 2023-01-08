@@ -6,8 +6,6 @@ killbyname() {
   echo "All <$NAME> killed!"
 }
 
-killbyname exchaind
-
 ./start_okc.sh
 
 sleep 2
