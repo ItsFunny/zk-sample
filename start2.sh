@@ -9,7 +9,7 @@ killbyname() {
 ./start_okc.sh
 
 sleep 2
-exchaincli tx send captain ex17w0adeg64ky0daxwd2ugyuneellmjgnxt5dhzh 100001okt --fees 1okt -b block -y --node tcp://127.0.0.1:26657  --chain-id exchain-67
+exchaincli tx send captain ex17w0adeg64ky0daxwd2ugyuneellmjgnxt5dhzh 100001okt --fees 1okt -b block -y --node tcp://127.0.0.1:26666  --chain-id exchain-67
 
 cd ./zkevm-contracts
 sleep 5
