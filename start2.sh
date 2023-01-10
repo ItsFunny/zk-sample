@@ -12,7 +12,7 @@ sleep 2
 exchaincli tx send captain ex17w0adeg64ky0daxwd2ugyuneellmjgnxt5dhzh 100001okt --fees 1okt -b block -y --node tcp://127.0.0.1:26657  --chain-id exchain-67
 
 cd ./zkevm-contracts
-sleep 2
+sleep 5
 # TODO: 这里判断下是否需要npm install
 npm run deploy:PoE2_0:okc
 

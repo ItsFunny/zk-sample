@@ -125,6 +125,8 @@ exchaind collect-gentxs --home $HOME_SERVER
 exchaind validate-genesis --home $HOME_SERVER
 exchaincli config keyring-backend test
 
-#run
-docker-compose  up -d  zkevm-mock-l1-network
+
+run
+#docker run -d --name exchain-mainnet-fullnode -v ${PWD}/_cache_evm:/root/.exchaind -p 8545:26659 -p 26656:26656 -p 26657:26657 okexchain/fullnode-mainnet:latest
+#docker-compose  up -d  zkevm-mock-l1-network
 # exchaincli tx send captain 0x83D83497431C2D3FEab296a9fba4e5FaDD2f7eD0 1okt --fees 1okt -b block -y
