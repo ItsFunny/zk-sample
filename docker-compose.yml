@@ -162,18 +162,18 @@ services:
 
   zkevm-mock-l1-network:
     container_name: zkevm-mock-l1-network
-    image: "exchaind/node"
+    image: "exchain"
     ports:
       - "26656-26660:26656-26660"
     environment:
       - ID=0
       - LOG=${LOG:-exchaind.log}
     volumes:
-      - ./_cache_home:/root/okchome
+      - ./_cache_home:/root/.exchaind
     command:
       - "/bin/sh"
       - "-c"
-      - "exchaind start --rpc.unsafe --local-rpc-port 26657 --log_file json --dynamic-gp-mode=2 --consensus.timeout_commit 2000ms --enable-preruntx=1 --iavl-enable-async-commit --enable-gid --append-pid=true --iavl-output-modules evm=0,acc=0 --commit-gap-height 3 --trace --home /root/okchome --chain-id exchain-67 --elapsed Round=1,CommitRound=1,Produce=1 --rest.laddr 'tcp://localhost:26659'"
+      - "exchaind start --local-rpc-port 26657 --rest.laddr 'tcp://localhost:26659'"
 
   zkevm-prover:
     container_name: zkevm-prover
