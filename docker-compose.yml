@@ -115,7 +115,7 @@ services:
       - SUBNETWORK=Local Ethereum
       - COIN=ETH
       - ETHEREUM_JSONRPC_VARIANT=geth
-      - ETHEREUM_JSONRPC_HTTP_URL=http://zkevm-mock-l1-network:8545
+      - ETHEREUM_JSONRPC_HTTP_URL=http://zkevm-mock-l1-network:26659
       - DATABASE_URL=postgres://state_user:state_password@zkevm-state-db:5432/l1_explorer_db
       - ECTO_USE_SSL=false
       - MIX_ENV=prod
@@ -216,7 +216,7 @@ services:
 #    #   - ./config/bridge-ui-deploy.sh:/app/scripts/deploy.sh
 #    #   - ./config/bridge-ui.env:/app/.env
 #    environment:
-#      - ETHEREUM_RPC_URL=http://localhost:8545
+#      - ETHEREUM_RPC_URL=http://localhost:26659
 #      - ETHEREUM_EXPLORER_URL=https://goerli.etherscan.io
 #      - ETHEREUM_BRIDGE_CONTRACT_ADDRESS=0x0165878A594ca255338adfa4d48449f69242Eb8F
 #      - ETHEREUM_PROOF_OF_EFFICIENCY_CONTRACT_ADDRESS=0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6
