@@ -24,7 +24,7 @@ EnableLog = false
 MaxConns = 200
 
 [Etherman]
-URL = "http://zkevm-mock-l1-network:26659"
+URL = "http://zkevm-mock-l1-network:26666"
 PrivateKeyPath = "/pk/keystore"
 PrivateKeyPassword = "testonly"
 L1ChainID=67
