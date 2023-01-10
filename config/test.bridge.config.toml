@@ -14,7 +14,7 @@ MaxConns = 20
 
 
 [Etherman]
-L1URL = "http://zkevm-mock-l1-network:26666"
+L1URL = "http://zkevm-mock-l1-network:26659"
 L2URLs = ["http://zkevm-json-rpc:8123"]
 
 [Synchronizer]
