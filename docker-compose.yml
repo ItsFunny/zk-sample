@@ -188,6 +188,18 @@ services:
       - ./config/test.prover.config.json:/usr/src/app/config.json
     command: >
       zkProver -c /usr/src/app/config.json
+  zkevm-bridge-db:
+    container_name: zkevm-bridge-db
+    image: postgres:14.0
+    expose:
+      - 5435
+    ports:
+      - 5435:5432
+    environment:
+      - POSTGRES_USER=test_user
+      - POSTGRES_PASSWORD=test_password
+      - POSTGRES_DB=test_db
+    command: [ "postgres", "-N", "500" ]
 
   zkevm-bridge-service:
     container_name: zkevm-bridge-service
