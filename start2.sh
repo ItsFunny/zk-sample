@@ -77,6 +77,7 @@ set_key_value "GlobalExitRootManAddr" ${globalExitRootManagerAddress} ${node_con
 
 sleep 3
 docker-compose up -d zkevm-state-db
+docker-compose up -d zkevm-bridge-db
 sleep 1
 docker-compose up -d zkevm-prover
 sleep 3
