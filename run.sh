@@ -1,6 +1,6 @@
 
 docker-compose up -d zkevm-state-db
-docker-compose up -d zkevm-mock-l1-network
+#docker-compose up -d zkevm-mock-l1-network
 sleep 1
 docker-compose up -d zkevm-prover
 sleep 3

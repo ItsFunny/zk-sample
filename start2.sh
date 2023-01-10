@@ -73,3 +73,16 @@ node_config_toml=${PWD}/config/test.node.config.toml
 set_key_value "PoEAddr" ${proofOfEfficiencyAddress} ${node_config_toml}
 set_key_value "MaticAddr" ${maticTokenAddress} ${node_config_toml}
 set_key_value "GlobalExitRootManAddr" ${globalExitRootManagerAddress} ${node_config_toml}
+
+
+sleep 3
+docker-compose up -d zkevm-state-db
+sleep 1
+docker-compose up -d zkevm-prover
+sleep 3
+docker-compose up -d zkevm-sequencer
+docker-compose up -d zkevm-aggregator
+docker-compose up -d zkevm-json-rpc
+docker-compose up -d zkevm-sync
+docker-compose up -d zkevm-broadcast
+docker-compose up -d zkevm-bridge-service
