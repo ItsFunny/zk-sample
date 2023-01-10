@@ -1,28 +1,10 @@
-FROM golang:stretch as build-env
+FROM okexchain/build-env:go1.18.5-static as okexchain-builder
 
-# Install minimum necessary dependencies
-ENV PACKAGES curl make git libc-dev bash gcc
-RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y $PACKAGES
+ENV GO111MODULE=on
+ENV GOPROXY=https://goproxy.cn,https://goproxy.io,direct
+WORKDIR /root
+COPY exchain ./exchain
+RUN cd exchain && make install WITH_ROCKSDB=true VenusHeight=1 LINK_STATICALLY=true && rm -rf /go/pkg && rm -rf .cache && cd /root && rm -rf /root/exchain
 
-WORKDIR /exchain
-# Add source files
-COPY . .
-
-# build exchain
-RUN make build
-
-# Final image
-FROM golang:1.17 as final
-
-WORKDIR /exchaind
-# Copy over binaries from the build-env
-COPY --from=build-env /exchain/build/exchaind /usr/bin/exchaind
-COPY --from=build-env /exchain/build/exchaincli /usr/bin/exchaincli
-COPY --from=build-env /exchain/networks/local/node/wrapper.sh /usr/bin/wrapper.sh
-
-EXPOSE 26656 26657
-ENTRYPOINT ["exchaind"]
-CMD ["start"]
-STOPSIGNAL SIGTERM
-
+VOLUME ["/data/lrp_node"]
+CMD ["exchaind"]
