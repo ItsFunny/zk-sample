@@ -205,8 +205,8 @@ services:
     container_name: zkevm-bridge-service
     image: zkevm-bridge-service
     ports:
-      - 8080:8080
-      - 9090:9090
+      - 9999:9999
+      - 7777:7777
     environment:
       - ZKEVM_BRIDGE_DATABASE_USER=state_user
       - ZKEVM_BRIDGE_DATABASE_PASSWORD=state_password
