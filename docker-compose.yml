@@ -164,7 +164,8 @@ services:
     container_name: zkevm-mock-l1-network
     image: "exchain"
     ports:
-      - "26656-26660:26656-26660"
+      - 26657:26657
+      - 26659:26659
     environment:
       - ID=0
       - LOG=${LOG:-exchaind.log}
@@ -173,7 +174,7 @@ services:
     command:
       - "/bin/sh"
       - "-c"
-      - "exchaind start --local-rpc-port 26657 --rest.laddr 'tcp://localhost:26659'"
+      - "exchaind start --local-rpc-port 26657 --rest.laddr 'tcp://0.0.0.0:26659'"
 
   zkevm-prover:
     container_name: zkevm-prover
