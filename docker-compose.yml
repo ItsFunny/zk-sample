@@ -174,7 +174,8 @@ services:
     command:
       - "/bin/sh"
       - "-c"
-      - "exchaind start --local-rpc-port 26657 --rest.laddr 'tcp://0.0.0.0:26659'"
+      - "exchaind start --local-rpc-port 26657 --rest.laddr 'tcp://0.0.0.0:26666' --pruning=nothing --rpc.unsafe"
+
 
   zkevm-prover:
     container_name: zkevm-prover
