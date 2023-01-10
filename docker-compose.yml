@@ -169,7 +169,7 @@ services:
       - ID=0
       - LOG=${LOG:-exchaind.log}
     volumes:
-      - ./_cache_home:/root/.exchaind
+      - ./_cache_evm:/root/.exchaind
     command:
       - "/bin/sh"
       - "-c"
