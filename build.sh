@@ -17,6 +17,6 @@ docker build -t exchain .
 
 cd ./zkevm-contracts
 node_modules=${PWD}/node_modules
-if [ ! -d "${node_modules}"]; then
+if [[ ! -d "${node_modules}" ]]; then
   npm install
 fi
