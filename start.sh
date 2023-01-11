@@ -13,7 +13,7 @@ exchaincli tx send captain ex17w0adeg64ky0daxwd2ugyuneellmjgnxt5dhzh 100001okt -
 
 cd ./zkevm-contracts
 sleep 5
-# TODO: 这里判断下是否需要npm install
+
 npm run deploy:PoE2_0:okc
 
 cd ..
