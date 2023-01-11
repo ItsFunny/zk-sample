@@ -28,20 +28,9 @@ git submodule update
 ## stop
 
 ```
-docker-compose stop
+./stop.sh
 ```
 
-## restart
-
-```
-./restart.sh
-```
-
-## down
-
-```
-docker-compose down
-```
 
 ## info
 
