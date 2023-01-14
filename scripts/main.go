@@ -49,7 +49,7 @@ func main() {
 	l1BridgeS, err := bridge.NewBridge(l1BridgeAddress, l1Client)
 	chkErr(err)
 
-	waitL1Block(ctx, l1Client, 100)
+	waitL1Block(ctx, l1Client, 202)
 	l1Bridge(ctx, l1Client, l1BridgeS, l1Auth)
 
 	l2Client, err := ethclient.Dial(l2Network)
@@ -113,6 +113,7 @@ func l2Claim(ctx context.Context, client *ethclient.Client, bridgeS *bridge.Brid
 				nil,
 			)
 			if err != nil {
+				log.Infof("调用失败,err:%s,times:%d", err.Error(), i)
 				continue
 			}
 			ret = tx
@@ -184,7 +185,7 @@ func (p proof) getSMTProof() [][32]byte {
 func str2Bytes32(str string) [32]byte {
 	var ret [32]byte
 	copy(ret[:], str)
-	fmt.Sprintf("%v", ret)
+	fmt.Println(string(ret[:]))
 	return ret
 }
 func chkErr(err error) {
