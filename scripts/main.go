@@ -63,24 +63,25 @@ func main() {
 }
 
 func l1Bridge(ctx context.Context, client *ethclient.Client, bridgeS *bridge.Bridge, auth *bind.TransactOpts) {
-	bal, err := client.BalanceAt(ctx, sequencerAddress, nil)
+	origin, err := client.BalanceAt(ctx, sequencerAddress, nil)
 	chkErr(err)
-	log.Infof("l1 sequencerAddress balance:%s", bal.String())
+	log.Infof("l1 sequencerAddress balance:%s", origin.String())
 	bridgeAuth := *auth
 	bridgeAuth.Value = _10_okt
 	tx, er := bridgeS.BridgeAsset(&bridgeAuth, l1ZeroAddress, 1, sequencerAddress, _10_okt, nil)
 	chkErr(er)
 	err = operations.WaitTxToBeMined(ctx, client, tx, txTimeout)
 	chkErr(err)
-	bal, err = client.BalanceAt(ctx, sequencerAddress, nil)
+	after, err := client.BalanceAt(ctx, sequencerAddress, nil)
 	chkErr(err)
-	log.Infof("l1 call bridge successfully,tx:%s sequenceAddress:%s", tx.Hash().String(), bal.String())
+	delta := origin.Sub(origin, after)
+	log.Infof("l1 call bridge successfully,tx:%s sequenceAddress:%s,delta:%s", tx.Hash().String(), after.String(), delta.String())
 }
 
 func l2Claim(ctx context.Context, client *ethclient.Client, bridgeS *bridge.Bridge, auth *bind.TransactOpts, index int64) {
-	bal, err := client.BalanceAt(ctx, sequencerAddress, nil)
+	origin, err := client.BalanceAt(ctx, sequencerAddress, nil)
 	chkErr(err)
-	log.Info("l2 sequencerAddress balance:%s,index:%d", bal.String(), index)
+	log.Infof("l2 sequencerAddress balance:%s,index:%d", origin.String(), index)
 
 	proof := getBridgeSMTProof(index)
 	tx, err := bridgeS.ClaimAsset(auth, proof.Proof.getSMTProof(),
@@ -96,9 +97,10 @@ func l2Claim(ctx context.Context, client *ethclient.Client, bridgeS *bridge.Brid
 	chkErr(err)
 	err = operations.WaitTxToBeMined(ctx, client, tx, txTimeout)
 	chkErr(err)
-	bal, err = client.BalanceAt(ctx, sequencerAddress, nil)
+	after, err := client.BalanceAt(ctx, sequencerAddress, nil)
 	chkErr(err)
-	log.Info("l1 call bridge successfully,tx:%s sequenceAddress:%s", tx.Hash().String(), bal.String())
+	delta := after.Sub(after, origin)
+	log.Infof("l2 call claim successfully,tx:%s sequenceAddress:%s,delta:%s", tx.Hash().String(), after.String(), delta.String())
 }
 
 func getBridgeSMTProof(index int64) RespBody {
