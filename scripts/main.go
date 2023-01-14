@@ -79,7 +79,7 @@ func getBridgeSMTProof(index uint) RespBody {
 		}
 		log.Infof("http get proof,times:%d ,body:%s", times, string(body))
 		var codeMsg CodeMsg
-		if err = json.Unmarshal(body, &codeMsg); nil != err {
+		if err = json.Unmarshal(body, &codeMsg); nil != err || codeMsg.Code == 0 {
 			var result RespBody
 			if err = json.Unmarshal(body, &result); err == nil {
 				return result
