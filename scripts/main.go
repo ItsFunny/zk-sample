@@ -59,13 +59,13 @@ func main() {
 	index, err := l1BridgeS.DepositCount(nil)
 	chkErr(err)
 
-	l2Claim(ctx, l2Client, l2BridgeS, l2Auth, index.Int64())
+	l2Claim(ctx, l2Client, l2BridgeS, l2Auth, index.Int64()-1)
 }
 
 func l1Bridge(ctx context.Context, client *ethclient.Client, bridgeS *bridge.Bridge, auth *bind.TransactOpts) {
 	bal, err := client.BalanceAt(ctx, sequencerAddress, nil)
 	chkErr(err)
-	log.Info("l1 sequencerAddress balance:%s", bal.String())
+	log.Infof("l1 sequencerAddress balance:%s", bal.String())
 	bridgeAuth := *auth
 	bridgeAuth.Value = _10_okt
 	tx, er := bridgeS.BridgeAsset(&bridgeAuth, l1ZeroAddress, 1, sequencerAddress, _10_okt, nil)
@@ -74,13 +74,13 @@ func l1Bridge(ctx context.Context, client *ethclient.Client, bridgeS *bridge.Bri
 	chkErr(err)
 	bal, err = client.BalanceAt(ctx, sequencerAddress, nil)
 	chkErr(err)
-	log.Info("l1 call bridge successfully,tx:%s sequenceAddress:%s", tx.Hash().String(), bal.String())
+	log.Infof("l1 call bridge successfully,tx:%s sequenceAddress:%s", tx.Hash().String(), bal.String())
 }
 
 func l2Claim(ctx context.Context, client *ethclient.Client, bridgeS *bridge.Bridge, auth *bind.TransactOpts, index int64) {
 	bal, err := client.BalanceAt(ctx, sequencerAddress, nil)
 	chkErr(err)
-	log.Info("l2 sequencerAddress balance:%s", bal.String())
+	log.Info("l2 sequencerAddress balance:%s,index:%d", bal.String(), index)
 
 	proof := getBridgeSMTProof(index)
 	tx, err := bridgeS.ClaimAsset(auth, proof.Proof.getSMTProof(),
