@@ -58,7 +58,7 @@ func main() {
 	l1Bridge(ctx, l1Client, l1BridgeS, l1Auth)
 	index, err := l1BridgeS.DepositCount(nil)
 	chkErr(err)
-
+	time.Sleep(time.Second * 5)
 	l2Claim(ctx, l2Client, l2BridgeS, l2Auth, index.Int64()-1)
 }
 
