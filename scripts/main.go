@@ -173,29 +173,17 @@ type proof struct {
 	RollupExitRoot string   `json:"rollup_exit_root"`
 }
 
-func (p proof) getSMTProof() [][]byte {
-	//proofs := p.MerkleProof
-	//ret := make([][32]byte, len(proofs))
-	//for index, v := range proofs {
-	//	ret[index] = str2Bytes32(v)
-	//}
-	//return ret
+func (p proof) getSMTProof() [][32]byte {
 	proofs := p.MerkleProof
-	ret := make([][]byte, len(proofs))
+	ret := make([][32]byte, len(proofs))
 	for index, v := range proofs {
 		ret[index] = str2Bytes32(v)
 	}
 	return ret
 }
 
-//	func str2Bytes32(str string) [32]byte {
-//		var ret [32]byte
-//		copy(ret[:], str)
-//		fmt.Println(string(ret[:]))
-//		return ret
-//	}
-func str2Bytes32(str string) []byte {
-	return []byte(str)
+func str2Bytes32(str string) [32]byte {
+	return common.HexToHash(str)
 }
 func chkErr(err error) {
 	if err != nil {
