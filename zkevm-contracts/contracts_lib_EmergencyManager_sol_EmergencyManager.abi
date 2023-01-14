@@ -1,0 +1,1 @@
+[{"anonymous":false,"inputs":[],"name":"EmergencyStateActivated","type":"event"},{"anonymous":false,"inputs":[],"name":"EmergencyStateDeactivated","type":"event"},{"inputs":[],"name":"isEmergencyState","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"}]
