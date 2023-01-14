@@ -171,6 +171,7 @@ func (p proof) getSMTProof() [][32]byte {
 func str2Bytes32(str string) [32]byte {
 	var ret [32]byte
 	copy(ret[:], str)
+	fmt.Sprintf("%v", ret)
 	return ret
 }
 func chkErr(err error) {
