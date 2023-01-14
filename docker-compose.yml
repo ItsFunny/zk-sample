@@ -174,7 +174,7 @@ services:
     command:
       - "/bin/sh"
       - "-c"
-      - "exchaind start --local-rpc-port 26657 --rest.laddr 'tcp://0.0.0.0:26659' --pruning=nothing --rpc.unsafe --fast-query=false"
+      - "exchaind start --local-rpc-port 26657 --rest.laddr 'tcp://0.0.0.0:26659' --pruning=nothing --rpc.unsafe --fast-query=false --consensus.timeout_commit 600ms"
 
 
   zkevm-prover:
