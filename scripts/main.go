@@ -20,11 +20,11 @@ import (
 const (
 	txTimeout               = 60 * time.Second
 	prvKey                  = "ac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80"
-	l1Network               = "http://127.0.0.1:26659"
-	bridgeServiceUrl        = "http://127.0.0.1:7777/merkle-proof?net_id=0&deposit_cnt=%d"
+	l1Network               = "http://52.199.88.250:26659"
+	bridgeServiceUrl        = "http://52.199.88.250:7777/merkle-proof?net_id=0&deposit_cnt=%d"
 	l1ChainId        uint64 = 67
 
-	l2Network        = "http://127.0.0.1:8123"
+	l2Network        = "http://52.199.88.250:8123"
 	l2ChainId uint64 = 1337
 )
 
@@ -48,18 +48,19 @@ func main() {
 	l1BridgeS, err := bridge.NewBridge(l1BridgeAddress, l1Client)
 	chkErr(err)
 
-	l2Client, err := ethclient.Dial(l2Network)
-	chkErr(err)
-	l2Auth := operations.MustGetAuth(prvKey, l2ChainId)
-	chkErr(err)
-	l2BridgeS, err := bridge.NewBridge(l2BridgeAddress, l2Client)
-	chkErr(err)
 	//
 	l1Bridge(ctx, l1Client, l1BridgeS, l1Auth)
-	index, err := l1BridgeS.DepositCount(nil)
-	chkErr(err)
-	time.Sleep(time.Second * 5)
-	l2Claim(ctx, l2Client, l2BridgeS, l2Auth, index.Int64()-1)
+
+	//l2Client, err := ethclient.Dial(l2Network)
+	//chkErr(err)
+	//l2Auth := operations.MustGetAuth(prvKey, l2ChainId)
+	//chkErr(err)
+	//l2BridgeS, err := bridge.NewBridge(l2BridgeAddress, l2Client)
+	//chkErr(err)
+	//index, err := l1BridgeS.DepositCount(nil)
+	//chkErr(err)
+	//time.Sleep(time.Second * 5)
+	//l2Claim(ctx, l2Client, l2BridgeS, l2Auth, index.Int64()-1)
 }
 
 func l1Bridge(ctx context.Context, client *ethclient.Client, bridgeS *bridge.Bridge, auth *bind.TransactOpts) {
