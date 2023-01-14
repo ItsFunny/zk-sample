@@ -49,6 +49,7 @@ func main() {
 	l1BridgeS, err := bridge.NewBridge(l1BridgeAddress, l1Client)
 	chkErr(err)
 
+	waitL1Block(ctx, l1Client, 100)
 	l1Bridge(ctx, l1Client, l1BridgeS, l1Auth)
 
 	l2Client, err := ethclient.Dial(l2Network)
@@ -77,6 +78,18 @@ func l1Bridge(ctx context.Context, client *ethclient.Client, bridgeS *bridge.Bri
 	chkErr(err)
 	delta := origin.Sub(origin, after)
 	log.Infof("l1 call bridge successfully,tx:%s sequenceAddress:%s,delta:%s", tx.Hash().String(), after.String(), delta.String())
+}
+
+func waitL1Block(ctx context.Context, client *ethclient.Client, max uint64) {
+	for {
+		number, err := client.BlockNumber(ctx)
+		log.Infof("wait l1 block,current:%d,until:%d", number, max)
+		chkErr(err)
+		if number >= max {
+			break
+		}
+		time.Sleep(time.Second * 3)
+	}
 }
 
 func l2Claim(ctx context.Context, client *ethclient.Client, bridgeS *bridge.Bridge, auth *bind.TransactOpts, index int64) {
