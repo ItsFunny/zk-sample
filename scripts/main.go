@@ -84,6 +84,7 @@ func l2Claim(ctx context.Context, client *ethclient.Client, bridgeS *bridge.Brid
 	log.Infof("l2 sequencerAddress balance:%s,index:%d", origin.String(), index)
 
 	proof := getBridgeSMTProof(index)
+	time.Sleep(time.Second * 10)
 	tx, err := bridgeS.ClaimAsset(auth, proof.Proof.getSMTProof(),
 		uint32(index), str2Bytes32(proof.Proof.MainExitRoot),
 		str2Bytes32(proof.Proof.RollupExitRoot),
