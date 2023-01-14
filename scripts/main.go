@@ -60,7 +60,6 @@ func getBridgeSMTProof(index uint) RespBody {
 	url := fmt.Sprintf(bridgeServiceUrl, index)
 	times := 0
 	for {
-		log.Infof("http get proof,times:%d ", times)
 		times++
 		resp, err := http.Get(url)
 		chkErr(err)
@@ -68,16 +67,23 @@ func getBridgeSMTProof(index uint) RespBody {
 		if err != nil {
 			continue
 		}
-		var result RespBody
-		if err == nil {
-			if err = json.Unmarshal([]byte(string(body)), &result); err == nil {
+		log.Infof("http get proof,times:%d ,body:%s", times, string(body))
+		var codeMsg CodeMsg
+		if err = json.Unmarshal(body, &codeMsg); nil != err {
+			var result RespBody
+			if err = json.Unmarshal(body, &result); err == nil {
 				return result
 			}
-
 		}
+
 		time.Sleep(time.Second * 3)
 	}
+	//{"code":2,"message":"not synchronized deposit","details":[]}
+}
 
+type CodeMsg struct {
+	Code    int    `json:"code"`
+	Message string `json:"message"`
 }
 
 type RespBody struct {
