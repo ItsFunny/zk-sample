@@ -24,7 +24,7 @@ GrpcURL = "zkevm-broadcast:61090"
 
 [BridgeController]
 Store = "postgres"
-Height = 0
+Height = 16
 
 [BridgeServer]
 GRPCPort = "9999"
