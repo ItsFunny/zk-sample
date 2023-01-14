@@ -840,21 +840,21 @@ func (_Bridge *BridgeTransactorSession) BridgeMessage(destinationNetwork uint32,
 // ClaimAsset is a paid mutator transaction binding the contract method 0x7b6323c1.
 //
 // Solidity: function claimAsset(bytes32[] smtProof, uint32 index, bytes32 mainnetExitRoot, bytes32 rollupExitRoot, uint32 originNetwork, address originTokenAddress, uint32 destinationNetwork, address destinationAddress, uint256 amount, bytes metadata) returns()
-func (_Bridge *BridgeTransactor) ClaimAsset(opts *bind.TransactOpts, smtProof [][32]byte, index uint32, mainnetExitRoot [32]byte, rollupExitRoot [32]byte, originNetwork uint32, originTokenAddress common.Address, destinationNetwork uint32, destinationAddress common.Address, amount *big.Int, metadata []byte) (*types.Transaction, error) {
+func (_Bridge *BridgeTransactor) ClaimAsset(opts *bind.TransactOpts, smtProof [][]byte, index uint32, mainnetExitRoot []byte, rollupExitRoot []byte, originNetwork uint32, originTokenAddress common.Address, destinationNetwork uint32, destinationAddress common.Address, amount *big.Int, metadata []byte) (*types.Transaction, error) {
 	return _Bridge.contract.Transact(opts, "claimAsset", smtProof, index, mainnetExitRoot, rollupExitRoot, originNetwork, originTokenAddress, destinationNetwork, destinationAddress, amount, metadata)
 }
 
 // ClaimAsset is a paid mutator transaction binding the contract method 0x7b6323c1.
 //
 // Solidity: function claimAsset(bytes32[] smtProof, uint32 index, bytes32 mainnetExitRoot, bytes32 rollupExitRoot, uint32 originNetwork, address originTokenAddress, uint32 destinationNetwork, address destinationAddress, uint256 amount, bytes metadata) returns()
-func (_Bridge *BridgeSession) ClaimAsset(smtProof [][32]byte, index uint32, mainnetExitRoot [32]byte, rollupExitRoot [32]byte, originNetwork uint32, originTokenAddress common.Address, destinationNetwork uint32, destinationAddress common.Address, amount *big.Int, metadata []byte) (*types.Transaction, error) {
+func (_Bridge *BridgeSession) ClaimAsset(smtProof [][]byte, index uint32, mainnetExitRoot []byte, rollupExitRoot []byte, originNetwork uint32, originTokenAddress common.Address, destinationNetwork uint32, destinationAddress common.Address, amount *big.Int, metadata []byte) (*types.Transaction, error) {
 	return _Bridge.Contract.ClaimAsset(&_Bridge.TransactOpts, smtProof, index, mainnetExitRoot, rollupExitRoot, originNetwork, originTokenAddress, destinationNetwork, destinationAddress, amount, metadata)
 }
 
 // ClaimAsset is a paid mutator transaction binding the contract method 0x7b6323c1.
 //
 // Solidity: function claimAsset(bytes32[] smtProof, uint32 index, bytes32 mainnetExitRoot, bytes32 rollupExitRoot, uint32 originNetwork, address originTokenAddress, uint32 destinationNetwork, address destinationAddress, uint256 amount, bytes metadata) returns()
-func (_Bridge *BridgeTransactorSession) ClaimAsset(smtProof [][32]byte, index uint32, mainnetExitRoot [32]byte, rollupExitRoot [32]byte, originNetwork uint32, originTokenAddress common.Address, destinationNetwork uint32, destinationAddress common.Address, amount *big.Int, metadata []byte) (*types.Transaction, error) {
+func (_Bridge *BridgeTransactorSession) ClaimAsset(smtProof [][]byte, index uint32, mainnetExitRoot []byte, rollupExitRoot []byte, originNetwork uint32, originTokenAddress common.Address, destinationNetwork uint32, destinationAddress common.Address, amount *big.Int, metadata []byte) (*types.Transaction, error) {
 	return _Bridge.Contract.ClaimAsset(&_Bridge.TransactOpts, smtProof, index, mainnetExitRoot, rollupExitRoot, originNetwork, originTokenAddress, destinationNetwork, destinationAddress, amount, metadata)
 }
 
