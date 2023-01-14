@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
+	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/okx/zk-demo/scripts/bridge"
 	"io"
 	"math/big"
@@ -83,21 +84,32 @@ func l2Claim(ctx context.Context, client *ethclient.Client, bridgeS *bridge.Brid
 	chkErr(err)
 	log.Infof("l2 sequencerAddress balance:%s,index:%d", origin.String(), index)
 
-	proof := getBridgeSMTProof(index)
-	time.Sleep(time.Second * 10)
-	tx, err := bridgeS.ClaimAsset(auth, proof.Proof.getSMTProof(),
-		uint32(index), str2Bytes32(proof.Proof.MainExitRoot),
-		str2Bytes32(proof.Proof.RollupExitRoot),
-		0,
-		l1ZeroAddress,
-		1,
-		sequencerAddress,
-		_10_okt,
-		nil,
-	)
-	chkErr(err)
-	err = operations.WaitTxToBeMined(ctx, client, tx, txTimeout)
-	chkErr(err)
+	loop := func(times int) *types.Transaction {
+		var ret *types.Transaction
+		for i := 0; i < times; i++ {
+			proof := getBridgeSMTProof(index)
+			time.Sleep(time.Second * 10)
+			tx, err := bridgeS.ClaimAsset(auth, proof.Proof.getSMTProof(),
+				uint32(index), str2Bytes32(proof.Proof.MainExitRoot),
+				str2Bytes32(proof.Proof.RollupExitRoot),
+				0,
+				l1ZeroAddress,
+				1,
+				sequencerAddress,
+				_10_okt,
+				nil,
+			)
+			if err != nil {
+				continue
+			}
+			ret = tx
+			err = operations.WaitTxToBeMined(ctx, client, tx, txTimeout)
+			chkErr(err)
+		}
+		return ret
+	}
+
+	tx := loop(10)
 	after, err := client.BalanceAt(ctx, sequencerAddress, nil)
 	chkErr(err)
 	delta := after.Sub(after, origin)
