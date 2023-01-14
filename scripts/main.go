@@ -20,8 +20,8 @@ import (
 const (
 	txTimeout               = 60 * time.Second
 	prvKey                  = "ac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80"
-	l1Network               = "http://52.199.88.250:26659"
-	bridgeServiceUrl        = "http://52.199.88.250:7777/merkle-proof?net_id=0&deposit_cnt=%d"
+	l1Network               = "http://127.0.0.1:26659"
+	bridgeServiceUrl        = "http://127.0.0.1:7777/merkle-proof?net_id=0&deposit_cnt=%d"
 	l1ChainId        uint64 = 67
 )
 
