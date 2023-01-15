@@ -36,7 +36,8 @@ git submodule update
 ```
 go run scripts/main.go  l1bridge
 ```
-
+> 
+> You will find out the command will be blocked until L1 chain's latest block number >=202 ,It is find and the reason about the magic number 202 is that the bridge-service will sync the info between L1 & L2 every 202 blocks
 ## claim
 
 ```

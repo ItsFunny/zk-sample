@@ -152,7 +152,7 @@ func l2Claim(ctx context.Context, client *ethclient.Client, bridgeS *bridge.Brid
 				nil,
 			)
 			if err != nil {
-				log.Infof("调用失败,err:%s,times:%d", err.Error(), i)
+				log.Infof("failed,err:%s,times:%d", err.Error(), i)
 				continue
 			}
 			ret = tx
