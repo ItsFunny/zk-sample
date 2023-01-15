@@ -155,6 +155,7 @@ func l2Claim(ctx context.Context, client *ethclient.Client, bridgeS *bridge.Brid
 			ret = tx
 			err = operations.WaitTxToBeMined(ctx, client, tx, txTimeout)
 			chkErr(err)
+			break
 		}
 		return ret
 	}
