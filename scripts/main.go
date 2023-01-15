@@ -12,9 +12,12 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/okx/zk-demo/scripts/bridge"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
+	"github.com/urfave/cli"
 	"io"
 	"math/big"
 	"net/http"
+	"os"
 	"time"
 )
 
@@ -65,6 +68,14 @@ func main() {
 	}
 	rootCmd.AddCommand(bridgeCmd(ctx, l1Client, l1BridgeS, l1Auth))
 	rootCmd.AddCommand(claimCmd(ctx, l2Client, l1BridgeS, l2BridgeS, l2Auth))
+	app := cli.NewApp()
+	app.Name = "helper"
+	app.Version = "1"
+	err = app.Run(os.Args)
+	if err != nil {
+		log.Fatal(err)
+		os.Exit(1)
+	}
 }
 
 func bridgeCmd(ctx context.Context, client *ethclient.Client, bridgeS *bridge.Bridge, auth *bind.TransactOpts) *cobra.Command {
@@ -77,14 +88,23 @@ func bridgeCmd(ctx context.Context, client *ethclient.Client, bridgeS *bridge.Br
 }
 
 func claimCmd(ctx context.Context, client *ethclient.Client, l1BridgeS *bridge.Bridge, bridgeS *bridge.Bridge, auth *bind.TransactOpts) *cobra.Command {
-	return &cobra.Command{
+	ret := &cobra.Command{
 		Use: "claim",
 		Run: func(cmd *cobra.Command, args []string) {
-			index, err := l1BridgeS.DepositCount(nil)
-			chkErr(err)
-			l2Claim(ctx, client, bridgeS, auth, index.Int64()-1)
+			indexFlag := viper.GetInt64("index")
+			var claimIndex int64
+			if indexFlag > -1 {
+				claimIndex = indexFlag
+			} else {
+				index, err := l1BridgeS.DepositCount(nil)
+				chkErr(err)
+				claimIndex = index.Int64() - 1
+			}
+			l2Claim(ctx, client, bridgeS, auth, claimIndex)
 		},
 	}
+	ret.Flags().Int64("index", -1, "index")
+	return ret
 }
 
 func l1Bridge(ctx context.Context, client *ethclient.Client, bridgeS *bridge.Bridge, auth *bind.TransactOpts) {
