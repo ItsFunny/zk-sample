@@ -137,7 +137,7 @@ func l2Claim(ctx context.Context, client *ethclient.Client, bridgeS *bridge.Brid
 		var ret *types.Transaction
 		for i := 0; i < times; i++ {
 			proof := getBridgeSMTProof(index)
-			time.Sleep(time.Second * 10)
+			time.Sleep(time.Second * 7)
 			tx, err := bridgeS.ClaimAsset(auth, proof.Proof.getSMTProof(),
 				uint32(index), str2Bytes32(proof.Proof.MainExitRoot),
 				str2Bytes32(proof.Proof.RollupExitRoot),
