@@ -12,7 +12,6 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/okx/zk-demo/scripts/bridge"
 	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
 	"io"
 	"math/big"
 	"net/http"
@@ -84,9 +83,9 @@ func l2ClaimCmd(ctx context.Context, client *ethclient.Client, l1BridgeS *bridge
 		Use:   "l2claim",
 		Short: "l2claim",
 		Run: func(cmd *cobra.Command, args []string) {
-			indexFlag := viper.GetInt64("index")
+			indexFlag, e := cmd.Flags().GetInt64("index")
 			var claimIndex int64
-			if indexFlag > -1 {
+			if e != nil && indexFlag > 0 {
 				claimIndex = indexFlag
 			} else {
 				index, err := l1BridgeS.DepositCount(nil)
