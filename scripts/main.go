@@ -52,9 +52,6 @@ func main() {
 	l1BridgeS, err := bridge.NewBridge(l1BridgeAddress, l1Client)
 	chkErr(err)
 
-	waitL1Block(ctx, l1Client, 202)
-	l1Bridge(ctx, l1Client, l1BridgeS, l1Auth)
-
 	l2Client, err := ethclient.Dial(l2Network)
 	chkErr(err)
 	l2Auth := operations.MustGetAuth(prvKey, l2ChainId)
