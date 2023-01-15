@@ -13,7 +13,6 @@ import (
 	"github.com/okx/zk-demo/scripts/bridge"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	"github.com/urfave/cli"
 	"io"
 	"math/big"
 	"net/http"
@@ -65,12 +64,7 @@ func main() {
 	}
 	rootCmd.AddCommand(l1bridgeCmd(ctx, l1Client, l1BridgeS, l1Auth))
 	rootCmd.AddCommand(l2ClaimCmd(ctx, l2Client, l1BridgeS, l2BridgeS, l2Auth))
-	app := cli.NewApp()
-	app.Name = "helper"
-	app.Version = "1"
-	err = app.Run(os.Args)
-	if err != nil {
-		log.Fatal(err)
+	if err := rootCmd.ExecuteContext(ctx); err != nil {
 		os.Exit(1)
 	}
 }
