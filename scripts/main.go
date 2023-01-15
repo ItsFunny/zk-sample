@@ -31,14 +31,17 @@ const (
 )
 
 var (
-	l1BridgeAddress  = common.HexToAddress("0x0165878A594ca255338adfa4d48449f69242Eb8F")
 	l1ZeroAddress    = common.HexToAddress("0x0000000000000000000000000000000000000000")
 	sequencerAddress = common.HexToAddress("0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266")
 	_10_okt, _       = new(big.Int).SetString("10000000000000000000", 10)
 
+	l1BridgeAddress = common.HexToAddress("0x0165878A594ca255338adfa4d48449f69242Eb8F")
 	l2BridgeAddress = common.HexToAddress("0x9d98deabc42dd696deb9e40b4f1cab7ddbf55988")
 )
 
+func initCfg() {
+
+}
 func main() {
 	ctx := context.Background()
 	//

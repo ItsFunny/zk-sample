@@ -15,6 +15,7 @@ cd ./zkevm-contracts
 sleep 5
 
 npm run deploy:PoE2_0:okc
+cp deployment/depoy_output.json  ./deployment/depoy_output_l1.json
 
 cd ..
 
@@ -73,6 +74,12 @@ node_config_toml=${PWD}/config/test.node.config.toml
 set_key_value "PoEAddr" ${proofOfEfficiencyAddress} ${node_config_toml}
 set_key_value "MaticAddr" ${maticTokenAddress} ${node_config_toml}
 set_key_value "GlobalExitRootManAddr" ${globalExitRootManagerAddress} ${node_config_toml}
+
+#
+#cd ./zkevm-contracts
+#npm run deploy:PoE2_0:okcl2
+#cp deployment/depoy_output.json  ./deployment/depoy_output_l2.json
+#cd ..
 
 
 sleep 3

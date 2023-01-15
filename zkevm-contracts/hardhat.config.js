@@ -110,6 +110,15 @@ module.exports = {
                 count: 20,
             },
         },
+        okcl2: {
+            url: 'http://127.0.0.1:8123',
+            accounts: {
+                mnemonic: process.env.MNEMONIC || DEFAULT_MNEMONIC,
+                path: 'm/44\'/60\'/0\'/0',
+                initialIndex: 0,
+                count: 20,
+            },
+        },
         hardhat: {
             initialDate: '0',
             accounts: {
