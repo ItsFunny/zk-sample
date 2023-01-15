@@ -4,18 +4,18 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/0xPolygonHermez/zkevm-node/log"
+	"github.com/0xPolygonHermez/zkevm-node/test/operations"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
+	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/okx/zk-demo/scripts/bridge"
+	"github.com/spf13/cobra"
 	"io"
 	"math/big"
 	"net/http"
 	"time"
-
-	"github.com/0xPolygonHermez/zkevm-node/log"
-	"github.com/0xPolygonHermez/zkevm-node/test/operations"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/ethclient"
 )
 
 const (
@@ -58,13 +58,37 @@ func main() {
 	chkErr(err)
 	l2BridgeS, err := bridge.NewBridge(l2BridgeAddress, l2Client)
 	chkErr(err)
-	index, err := l1BridgeS.DepositCount(nil)
-	chkErr(err)
-	time.Sleep(time.Second * 5)
-	l2Claim(ctx, l2Client, l2BridgeS, l2Auth, index.Int64()-1)
+
+	rootCmd := &cobra.Command{
+		Use:   "zkhelper",
+		Short: "",
+	}
+	rootCmd.AddCommand(bridgeCmd(ctx, l1Client, l1BridgeS, l1Auth))
+	rootCmd.AddCommand(claimCmd(ctx, l2Client, l1BridgeS, l2BridgeS, l2Auth))
+}
+
+func bridgeCmd(ctx context.Context, client *ethclient.Client, bridgeS *bridge.Bridge, auth *bind.TransactOpts) *cobra.Command {
+	return &cobra.Command{
+		Use: "bridge ",
+		Run: func(cmd *cobra.Command, args []string) {
+			l1Bridge(ctx, client, bridgeS, auth)
+		},
+	}
+}
+
+func claimCmd(ctx context.Context, client *ethclient.Client, l1BridgeS *bridge.Bridge, bridgeS *bridge.Bridge, auth *bind.TransactOpts) *cobra.Command {
+	return &cobra.Command{
+		Use: "claim",
+		Run: func(cmd *cobra.Command, args []string) {
+			index, err := l1BridgeS.DepositCount(nil)
+			chkErr(err)
+			l2Claim(ctx, client, bridgeS, auth, index.Int64()-1)
+		},
+	}
 }
 
 func l1Bridge(ctx context.Context, client *ethclient.Client, bridgeS *bridge.Bridge, auth *bind.TransactOpts) {
+	waitL1Block(ctx, client, 202)
 	origin, err := client.BalanceAt(ctx, sequencerAddress, nil)
 	chkErr(err)
 	log.Infof("l1 sequencerAddress balance:%s", origin.String())
