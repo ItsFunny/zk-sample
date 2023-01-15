@@ -161,10 +161,14 @@ func l2Claim(ctx context.Context, client *ethclient.Client, bridgeS *bridge.Brid
 	}
 
 	tx := loop(10)
-	after, err := client.BalanceAt(ctx, sequencerAddress, nil)
-	chkErr(err)
-	delta := after.Sub(after, origin)
-	log.Infof("l2 call claim successfully,tx:%s sequenceAddress:%s,delta:%s", tx.Hash().String(), after.String(), delta.String())
+	if tx != nil {
+		after, err := client.BalanceAt(ctx, sequencerAddress, nil)
+		chkErr(err)
+		delta := after.Sub(after, origin)
+		log.Infof("l2 call claim successfully,tx:%s sequenceAddress:%s,delta:%s", tx.Hash().String(), after.String(), delta.String())
+	} else {
+		log.Info("wait several minutes and try to  claim again ")
+	}
 }
 
 func getBridgeSMTProof(index int64) RespBody {
