@@ -1,10 +1,10 @@
-
 ## requirements
 
 * x86
 * `go` <https://go.dev/doc/install>
 * `docker` <https://www.docker.com/get-started>
 * `docker-compose` <https://docs.docker.com/compose/install/>
+* `node`(version >=16)
 
 ## init
 
@@ -31,11 +31,44 @@ git submodule update
 ./stop.sh
 ```
 
+## bridge
 
-## info
+```
+go run scripts/main.go  l1bridge
+```
 
-[test account](https://github.com/cwbhhjl/zkevm-node/tree/e8a3c4bf5629b5325191e16d5180c9396216fa9f/docs/running_local.md#accounts)
+## claim
 
-[metamask config](https://github.com/cwbhhjl/zkevm-node/tree/e8a3c4bf5629b5325191e16d5180c9396216fa9f/docs/running_local.md#metamask)
+```
+go run scripts/main.go  l2claim
+```
 
-bridge ui <http://localhost:8090/>  
+> Note:
+>
+> claim may be failed with `err:execution reverted: Bridge::_verifyLeaf: GLOBAL_EXIT_ROOT_INVALID_OR_NOT_YET_CLAIMABL`
+> Wait more minutes and try again.
+> If you want to claim specific bridge index, try `go run scripts/main.go  l2claim --index={specificNumber}`
+
+## Metamask
+
+> Metamask requires the network to be running while configuring it, so make sure your network is running before starting.
+
+To configure your Metamask to use your local environment, follow these steps:
+
+1. Log in to your Metamask wallet
+2. Click on your account picture and then on Settings
+3. On the left menu, click on Networks
+4. Click on `Add Network` button
+5. Fill up the L2 network information
+    1. `Network Name:` OKC-zkEVM-Local-L2
+    2. `New RPC URL:` <http://localhost:8123>
+    3. `ChainID:` 1337
+    4. `Currency Symbol:` OKT
+6. Click on Save
+7. Click on `Add Network` button
+8. Fill up the L1 network information
+    1. `Network Name:` OKC-Local-L1
+    2. `New RPC URL:` <http://localhost:26659>
+    3. `ChainID:` 67
+    4. `Currency Symbol:` OKT
+9. Click on Save
