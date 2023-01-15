@@ -61,10 +61,10 @@ func main() {
 
 	rootCmd := &cobra.Command{
 		Use:   "zkhelper",
-		Short: "",
+		Short: "zkhelper",
 	}
-	rootCmd.AddCommand(bridgeCmd(ctx, l1Client, l1BridgeS, l1Auth))
-	rootCmd.AddCommand(claimCmd(ctx, l2Client, l1BridgeS, l2BridgeS, l2Auth))
+	rootCmd.AddCommand(l1bridgeCmd(ctx, l1Client, l1BridgeS, l1Auth))
+	rootCmd.AddCommand(l2ClaimCmd(ctx, l2Client, l1BridgeS, l2BridgeS, l2Auth))
 	app := cli.NewApp()
 	app.Name = "helper"
 	app.Version = "1"
@@ -75,18 +75,20 @@ func main() {
 	}
 }
 
-func bridgeCmd(ctx context.Context, client *ethclient.Client, bridgeS *bridge.Bridge, auth *bind.TransactOpts) *cobra.Command {
+func l1bridgeCmd(ctx context.Context, client *ethclient.Client, bridgeS *bridge.Bridge, auth *bind.TransactOpts) *cobra.Command {
 	return &cobra.Command{
-		Use: "bridge ",
+		Use:   "l1bridge ",
+		Short: "l1bridge",
 		Run: func(cmd *cobra.Command, args []string) {
 			l1Bridge(ctx, client, bridgeS, auth)
 		},
 	}
 }
 
-func claimCmd(ctx context.Context, client *ethclient.Client, l1BridgeS *bridge.Bridge, bridgeS *bridge.Bridge, auth *bind.TransactOpts) *cobra.Command {
+func l2ClaimCmd(ctx context.Context, client *ethclient.Client, l1BridgeS *bridge.Bridge, bridgeS *bridge.Bridge, auth *bind.TransactOpts) *cobra.Command {
 	ret := &cobra.Command{
-		Use: "claim",
+		Use:   "l2claim",
+		Short: "l2claim",
 		Run: func(cmd *cobra.Command, args []string) {
 			indexFlag := viper.GetInt64("index")
 			var claimIndex int64
