@@ -85,7 +85,7 @@ func l2ClaimCmd(ctx context.Context, client *ethclient.Client, l1BridgeS *bridge
 		Run: func(cmd *cobra.Command, args []string) {
 			indexFlag, e := cmd.Flags().GetInt64("index")
 			var claimIndex int64
-			if e != nil && indexFlag > 0 {
+			if e == nil && indexFlag > 0 {
 				claimIndex = indexFlag
 			} else {
 				index, err := l1BridgeS.DepositCount(nil)
