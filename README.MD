@@ -54,7 +54,7 @@ go run scripts/main.go  l2claim
 
 > Metamask requires the network to be running while configuring it, so make sure your network is running before starting.
 
-- private key: ac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
+**private key: ac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80**
 
 To configure your Metamask to use your local environment, follow these steps:
 
