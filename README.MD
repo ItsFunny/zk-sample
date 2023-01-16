@@ -37,7 +37,7 @@ git submodule update
 go run scripts/main.go  l1bridge
 ```
 > 
-> You will find out the command will be blocked until L1 chain's latest block number >=202 ,It is find and the reason about the magic number 202 is that the bridge-service will sync the info between L1 & L2 every 202 blocks
+> You will find out the command will be blocked until L1 chain's latest block number >=202 ,It is fine and the reason about the magic number 202 is that the bridge-service will sync the info between L1 & L2 every 202 blocks
 ## claim
 
 ```
@@ -53,6 +53,8 @@ go run scripts/main.go  l2claim
 ## Metamask
 
 > Metamask requires the network to be running while configuring it, so make sure your network is running before starting.
+
+- private key: ac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
 
 To configure your Metamask to use your local environment, follow these steps:
 
